@@ -1,0 +1,15 @@
+---> Imobiliaria
+-------> Usuario
+-----------> Imovel
+
+
+
+----> Usuario
+--------> Imovel
+
+
+
+----> Imobiliaria
+-------> Usario default
+-----------> Imovel
+
