@@ -4,23 +4,25 @@ const Imovel = new mongoose.Schema({
     id: {
         type: Number,
         unique: true,
+        index: true,
         auto: true,
     },
     codigo: {
         type: String,
+        required: true,
     },
     nome: {
         type: String,
+        required: true,
       },
     
-    created_user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserImobil',
-    },
+    
     valor: {
+        required: true,
         type: String
     },
     tipo: {
+        required: true,
         type: String
     },
     item1: {
@@ -60,11 +62,14 @@ const Imovel = new mongoose.Schema({
     numero: {
         type: String,
     },
+    created_user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserImobil',
+    },
     created_at: {
         type: Date,
         default: Date.now
-    },
-   
+    }
 });
 
 

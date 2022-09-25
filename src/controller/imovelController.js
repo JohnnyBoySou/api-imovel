@@ -1,10 +1,5 @@
-import {
-    request,
-    response
-} from "express"
-
-
-import Imovel from '../schemas/ImovelSchema'
+import {request, response} from "express"
+import Imovel from '../schemas/ImvlSchema.js'
 
 class ImovelController {
 
