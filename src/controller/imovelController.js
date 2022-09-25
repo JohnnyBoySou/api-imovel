@@ -2,8 +2,9 @@ import {
     request,
     response
 } from "express"
-import Imovel from '../schemas/imovelSchema.js'
 
+
+import Imovel from '../schemas/ImovelSchema'
 
 class ImovelController {
 
