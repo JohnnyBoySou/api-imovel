@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-const UserComunm = new mongoose.Schema({
+const User = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -21,12 +21,16 @@ const UserComunm = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    likes: {
+        type: Number,
+        default: 0,
+    }
 });
 
 
-UserComunm.pre('save', async function(next){
+User.pre('save', async function(next){
     const hashedPassword = await bcrypt.hash(this.password, 12)
     this.password = hashedPassword;    
 })
 
-export default mongoose.model('UserComunm', UserComunm)
+export default mongoose.model('User', User)

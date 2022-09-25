@@ -1,5 +1,5 @@
 import { request, response } from "express"
-import UserComun from '../schemas/userComunmSchema.js'
+import User from '../schemas/userSchema.js'
 import Imovel from '../schemas/imovelSchema.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -14,10 +14,9 @@ function generateToken( params = {} ) {
 }
 
 class UserController {
-    
     async find (response) {
         try{
-            const users = await UserComun.find()
+            const users = await User.find()
             return response.json(users)
         }
         catch (error) {
@@ -29,10 +28,10 @@ class UserController {
     }
 
     async register(request, response) {
-        const { email, password, name } =  request.body;
-        console.log(name)
+        
+        const { email, password, name} = request.body
         try {
-            const userExist = await UserComun.findOne({ email })       
+            const userExist = await User.findOne({ email })         
 
             if(userExist) {
                 return response.status(400).json({
@@ -41,7 +40,7 @@ class UserController {
                 });
             }
 
-            const user = await UserComun.create({email, password, name});
+            const user = await User.create({email, password, name});
         
             return response.send({
                 user,
@@ -55,24 +54,26 @@ class UserController {
 
 
 
-    async authenticate(request, response,){
+    async authenticate(request, response){
         const { email, password } = request.body
 
-        const user = await UserComun.findOne({ email }).select('+password');
+        const user = await User.findOne({ email }).select('+password');
    
         if(!user){
-            return response.status(400).send({ error: 'User not found'});}
+            return response.status(400).send({ error: 'Email not found'});}
        
         if(!await bcrypt.compare(password, user.password)){
              return response.status(400).send({ error: 'Invalid password'});}   
 
 
-     user.password = undefined
+        user.password = undefined
      
-    response.send({ 
-        user,
-        token: generateToken({id: user.id}) 
-    })}
+        return response.send({ 
+            user,
+            token: generateToken({id: user.id}) 
+        })}
+
+
 
     async addImovel(request, response){
         try {
