@@ -2,10 +2,7 @@ import {
     request,
     response
 } from "express"
-import UserImobil from '../schemas/userImobilSchema.js'
 import Imovel from '../schemas/imovelSchema.js'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 
 
 class ImovelController {
