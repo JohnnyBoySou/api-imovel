@@ -1,6 +1,5 @@
 import { request, response } from "express"
 import User from '../schemas/userSchema.js'
-import Imovel from '../schemas/imovelSchema.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
@@ -73,20 +72,7 @@ class UserController {
             token: generateToken({id: user.id}) 
         })}
 
-
-
-    async addImovel(request, response){
-        try {
-            const imovel = await Imovel.create({ ...request.body, user: request.userId});
-            return response.send({imovel})
-
-        } catch (error) {
-            return response.status(500).send({
-                error: 'error',
-                message: error
-            })
-        }
-    }}
+}
 
 
 
